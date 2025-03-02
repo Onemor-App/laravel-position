@@ -1,5 +1,5 @@
 {
-    "name": "nevadskiy/laravel-position",
+    "name": "onemor-app/laravel-position",
     "description": "Arrange Laravel models in a given order.",
     "license": "MIT",
     "type": "library",
