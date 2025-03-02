@@ -49,7 +49,7 @@ class PositioningScope implements Scope
     /**
      * Select all models that are between the given positions.
      */
-    public function wherePositionBetween(Builder $query, int $startPosition = null, int $endPosition = null): Builder
+    public function wherePositionBetween(Builder $query, ?int $startPosition = null, ?int $endPosition = null): Builder
     {
         $query->when($startPosition !== null, static function (Builder $query) use ($startPosition) {
             $query->where($query->getModel()->getPositionColumn(), '>=', $startPosition);
@@ -65,7 +65,7 @@ class PositioningScope implements Scope
     /**
      * Shift all models that are between the given positions to the beginning of the sequence.
      */
-    public function shiftToStart(Builder $query, int $startPosition = null, int $endPosition = null, int $amount = 1): int
+    public function shiftToStart(Builder $query, ?int $startPosition = null, ?int $endPosition = null, int $amount = 1): int
     {
         return $this->preserveTimestamps($query->getModel(), function () use ($query, $startPosition, $endPosition, $amount) {
             return $query->wherePositionBetween($startPosition, $endPosition)
@@ -76,7 +76,7 @@ class PositioningScope implements Scope
     /**
      * Shift all models that are between the given positions to the end of the sequence.
      */
-    public function shiftToEnd(Builder $query, int $startPosition, int $endPosition = null, int $amount = 1): int
+    public function shiftToEnd(Builder $query, int $startPosition, ?int $endPosition = null, int $amount = 1): int
     {
         return $this->preserveTimestamps($query->getModel(), function () use ($query, $startPosition, $endPosition, $amount) {
             return $query->wherePositionBetween($startPosition, $endPosition)
